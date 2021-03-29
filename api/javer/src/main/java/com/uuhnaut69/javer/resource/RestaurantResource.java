@@ -63,7 +63,7 @@ public class RestaurantResource {
 
   @DeleteMapping("/{restaurantId}/dishes/{dishId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void updateDish(@PathVariable UUID restaurantId, @PathVariable UUID dishId) {
+  public void deleteDish(@PathVariable UUID restaurantId, @PathVariable UUID dishId) {
     dishService.delete(restaurantId, dishId);
   }
 
