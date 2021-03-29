@@ -1,0 +1,22 @@
+server:
+  port: 8686
+spring:
+  application:
+    name: jaggregator
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:29092
+        streams:
+          binder:
+            configuration:
+              commit.interval.ms: 100
+              processing.guarantee: exactly_once
+      bindings:
+        process-in-0:
+          destination: postgres.public.dishes
+        process-in-1:
+          destination: postgres.public.restaurants
+        process-out-0:
+          destination: enriched.restaurants
