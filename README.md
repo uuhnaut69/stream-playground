@@ -1,1 +1,3 @@
-# order-store
+# Stream Playground
+
+Stream playground with Spring boot, Kafka, Java,...
