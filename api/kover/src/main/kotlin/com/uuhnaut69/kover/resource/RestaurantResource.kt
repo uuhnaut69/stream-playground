@@ -23,12 +23,38 @@ class RestaurantResource(private val dishService: DishService, private val resta
     @GetMapping
     fun findAllRestaurants(): List<Restaurant> = restaurantService.findAll()
 
-    @PostMapping("/{restaurantId}")
+    @PutMapping("/{restaurantId}")
+    fun updateRestaurant(
+        @PathVariable restaurantId: UUID,
+        @RequestBody @Valid restaurantRequest: RestaurantRequest
+    ): Restaurant = restaurantService.update(restaurantId, restaurantRequest)
+
+    @DeleteMapping("/{restaurantId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteRestaurant(
+        @PathVariable restaurantId: UUID
+    ) = restaurantService.delete(restaurantId)
+
+    @PostMapping("/{restaurantId}/dishes")
     @ResponseStatus(HttpStatus.CREATED)
     fun createDish(@PathVariable restaurantId: UUID, @RequestBody @Valid dishRequest: DishRequest): Dish =
         dishService.create(restaurantId, dishRequest)
 
-    @GetMapping("/{restaurantId}")
+    @PutMapping("/{restaurantId}/dishes/{dishId}")
+    fun updateDish(
+        @PathVariable restaurantId: UUID,
+        @PathVariable dishId: UUID,
+        @RequestBody @Valid dishRequest: DishRequest
+    ): Dish = dishService.update(restaurantId, dishId, dishRequest)
+
+    @DeleteMapping("/{restaurantId}/dishes/{dishId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun deleteDish(
+        @PathVariable restaurantId: UUID,
+        @PathVariable dishId: UUID
+    ) = dishService.delete(restaurantId, dishId)
+
+    @GetMapping("/{restaurantId}/dishes")
     fun findAllByRestaurantId(@PathVariable restaurantId: UUID): List<Dish> =
         dishService.findAllByRestaurantId(restaurantId)
 }

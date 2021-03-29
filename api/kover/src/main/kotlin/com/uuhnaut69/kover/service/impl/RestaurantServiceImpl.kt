@@ -29,4 +29,15 @@ class RestaurantServiceImpl(
         val restaurant = objectMapper.convertValue<Restaurant>(restaurantRequest)
         return restaurantRepository.save(restaurant)
     }
+
+    override fun update(restaurantId: UUID, restaurantRequest: RestaurantRequest): Restaurant {
+        val restaurant = findById(restaurantId)
+        restaurant.name = restaurantRequest.name
+        restaurant.address = restaurantRequest.address
+        return restaurantRepository.save(restaurant)
+    }
+
+    override fun delete(restaurantId: UUID) {
+        restaurantRepository.deleteById(restaurantId)
+    }
 }

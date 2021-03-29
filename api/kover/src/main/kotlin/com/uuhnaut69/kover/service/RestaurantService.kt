@@ -11,4 +11,8 @@ interface RestaurantService {
     fun findById(restaurantId: UUID): Restaurant
 
     fun create(restaurantRequest: RestaurantRequest): Restaurant
+
+    fun update(restaurantId: UUID, restaurantRequest: RestaurantRequest): Restaurant
+
+    fun delete(restaurantId: UUID)
 }
