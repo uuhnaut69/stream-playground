@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JaggregatorApplication {
+public class JAggregatorApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(JaggregatorApplication.class, args);
+    SpringApplication.run(JAggregatorApplication.class, args);
   }
 }

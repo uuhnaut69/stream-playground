@@ -12,8 +12,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>spring-cloud-streams-aggregator</module>
-        <module>spring-kafka-streams-aggregator</module>
+        <module>java-spring-cloud-streams-aggregator</module>
+        <module>java-spring-kafka-streams-aggregator</module>
         <module>kotlin-spring-kafka-streams-aggregator</module>
     </modules>
 </project>
