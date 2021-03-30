@@ -12,6 +12,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>jaggregator</module>
+        <module>spring-cloud-stream-aggregator</module>
     </modules>
 </project>
