@@ -46,7 +46,7 @@ class EventProcessor {
             { it.restaurantId },
             { dish, restaurant -> DishWithRestaurant(dish, restaurant) },
             Materialized.with(Serdes.String(), dishWithRestaurantJsonSerde)
-        ).groupBy({ _, dishWithRestaurant ->
+        ).groupBy({ dishId, dishWithRestaurant ->
             KeyValue.pair(
                 dishWithRestaurant.restaurant.id,
                 dishWithRestaurant
@@ -54,12 +54,12 @@ class EventProcessor {
         }, Grouped.with(Serdes.String(), dishWithRestaurantJsonSerde))
             .aggregate(
                 { RestaurantWithDishes() },
-                { _: String, dishWithRestaurant: DishWithRestaurant, aggregate: RestaurantWithDishes ->
+                { restaurantId: String, dishWithRestaurant: DishWithRestaurant, aggregate: RestaurantWithDishes ->
                     aggregate.addDish(
                         dishWithRestaurant
                     )
                 },
-                { _: String, dishWithRestaurant: DishWithRestaurant, aggregate: RestaurantWithDishes ->
+                { restaurantId: String, dishWithRestaurant: DishWithRestaurant, aggregate: RestaurantWithDishes ->
                     aggregate.removeDish(
                         dishWithRestaurant
                     )
